@@ -1,0 +1,14 @@
+<div class="bar-container">
+  <div *ngFor="let l of left;"
+       class="fragment">
+   {{ l }}
+  </div>
+  <div *ngFor="let f of fragments" [attr.data-index]="i"
+       [ngClass]="{
+         'current': cursor === f,
+         'baseline': place === baseline
+       }"
+       class="fragment">
+   {{ f }}
+  </div>
+<div>

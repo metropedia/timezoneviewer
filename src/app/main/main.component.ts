@@ -11,28 +11,58 @@ declare const localStorage;
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  myTimezone = moment.tz.guess();
+  guess = moment.tz.guess();
+  baseline = this.guess;
   momentSnapshot = moment();
-  myFavorites = [];
+  myFavorites = [this.guess, 'UTC'];
   selectedPlace: string;
-  states: string[] = moment.tz.names();
+  timezones: string[] = moment.tz.names();
 
   constructor() {
   }
 
   ngOnInit() {
-    this.myFavorites = JSON.parse(localStorage.getItem('myFavorites')) || [];
+    const baseline = localStorage.getItem('baseline');
+    if (baseline) {
+      this.setBaseline(baseline);
+    }
   }
 
   addFavorite(event) {
     if (event.keyCode == 13) {
       console.log('add', this.selectedPlace)
-      const place = {
-        name: this.selectedPlace
-      };
+      const place = this.selectedPlace;
       this.myFavorites.push(place);
       localStorage.setItem('myFavorites', JSON.stringify(this.myFavorites));
     }
+  }
+
+  refreshTime() {
+    this.momentSnapshot = moment();
+  }
+
+  getMomentSnapshot() {
+    return this.momentSnapshot;
+  }
+
+  setBaseline(tz) {
+    localStorage.setItem('baseline', tz);
+    this.baseline = tz;
+    this.reload();
+  }
+
+  reload() {
+    const stored = JSON.parse(localStorage.getItem('myFavorites'));
+    if (stored) {
+      this.myFavorites = [];
+      setTimeout( f => {
+        this.myFavorites = stored;
+      }, 0);
+    }
+  }
+
+  getBaseline() {
+    return this.baseline;
   }
 
 }

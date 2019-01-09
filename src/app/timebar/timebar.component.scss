@@ -1,0 +1,18 @@
+.bar-container {
+  display: flex;
+}
+.fragment {
+  flex: 0 0 20px;
+  width: 20px;
+  overflow: hidden;
+  text-align: center;
+  font-size: 10px;
+  background: rgba(0, 0, 0, 0.1);
+}
+.current {
+  background: lime;
+}
+.current.baseline {
+  background: indianred;
+  color: white;
+}
