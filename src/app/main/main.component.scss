@@ -1,0 +1,23 @@
+tr td {
+  cursor: default;
+}
+tr:hover {
+  background: #444;
+}
+tr.baseline:hover,
+tr.baseline {
+  background: #fff;
+  color: #333;
+}
+.place {
+  font-size: 2em;
+  padding-left: 20px;
+}
+.time {
+  font-size: 15px;
+  text-align: center;
+  padding: 0 10px;
+}
+.time>div:first-child {
+  font-size: 12px;
+}

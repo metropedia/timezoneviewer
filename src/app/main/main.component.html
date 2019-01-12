@@ -1,22 +1,46 @@
-<div>
-  <div>
-    Type your favorite places below
+<div (click)="refreshTime()">
+
+<div class="row">
+  <div class="col col-sm-12 col-md-6 col-lg-6">
+    <input [(ngModel)]="selectedPlace"
+           [typeahead]="timezones"
+           placeholder="Type your favorite places here"
+           class="form-control"
+           (keyup)="addFavorite($event)">
   </div>
-  <input [(ngModel)]="selectedPlace"
-         [typeahead]="states"
-         class="form-control"
-         (keyup)="addFavorite($event, selectedPlace)">
 </div>
 
+<br />
+
 <table>
-  <tr>
-    <td>{{ myTimezone }} (Your timezone)</td>
-    <td>{{ momentSnapshot.tz(myTimezone).format('MMMM Do YYYY') }}</td>
-    <td>{{ momentSnapshot.tz(myTimezone).format('h:mm:ss a') }}</td>
-  </tr>
-  <tr *ngFor="let place of myFavorites;">
-    <td>{{ place.name }}</td>
-    <td>{{ momentSnapshot.tz(place.name).format('MMMM Do YYYY') }}</td>
-    <td>{{ momentSnapshot.tz(place.name).format('h:mm:ss a') }}</td>
+  <tr *ngFor="let place of myFavorites;"
+      [ngClass]="{
+        'baseline': baseline === place
+      }"
+      (click)="setBaseline(place);"
+  >
+    <td height="80"
+        class="place">{{ place }}</td>
+    <td class="time">
+      <div>{{ momentSnapshot.tz(place).format('MMMM') }}</div>
+      <div>{{ momentSnapshot.tz(place).format('Do') }}</div>
+    </td>
+    <!--
+    <td>{{
+      (
+        momentSnapshot.tz(place).utcOffset()
+       -momentSnapshot.tz(baseline).utcOffset()
+      )/60
+    }}</td>
+    <td>{{ momentSnapshot.tz(place).utcOffset()/60 }}</td>
+    <td>{{ momentSnapshot.tz(place).format('HH:mm:ss') }}</td>
+    -->
+    <td>
+      <app-timebar [momentSnapshot]="momentSnapshot"
+                   [place]="place"
+                   [baseline]="baseline"></app-timebar>
+    </td>
   </tr>
 </table>
+
+</div>
