@@ -29,7 +29,7 @@ export class MainComponent implements OnInit {
   }
 
   addFavorite(event) {
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
       console.log('add', this.selectedPlace)
       const place = this.selectedPlace;
       this.myFavorites.push(place);
