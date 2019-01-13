@@ -36,5 +36,4 @@ export class TimebarComponent implements OnInit {
     const all = [...left, hour, ...right]
     this.fragments = all;
   }
-
 }
