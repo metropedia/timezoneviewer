@@ -17,6 +17,7 @@ export class MainComponent implements OnInit {
   myFavorites = [this.guess, 'UTC'];
   selectedPlace: string;
   timezones: string[] = moment.tz.names();
+  actionVisibility = {};
 
   constructor() {
   }
@@ -29,10 +30,14 @@ export class MainComponent implements OnInit {
   }
 
   addFavorite() {
-    console.log('add', this.selectedPlace)
+    console.log('add', this.selectedPlace);
     const place = this.selectedPlace;
     this.myFavorites.push(place);
-    localStorage.setItem('myFavorites', JSON.stringify(this.myFavorites));
+    this.saveFavorite(this.myFavorites);
+  }
+
+  saveFavorite(list) {
+    localStorage.setItem('myFavorites', JSON.stringify(list));
   }
 
   refreshTime() {
@@ -44,6 +49,7 @@ export class MainComponent implements OnInit {
   }
 
   setBaseline(tz) {
+    this.resetActionVisibility();
     localStorage.setItem('baseline', tz);
     this.baseline = tz;
     this.reload();
@@ -68,4 +74,17 @@ export class MainComponent implements OnInit {
     return parts.length > 1 ? parts : ['', text];
   }
 
+  onSwipe(event, place) {
+    this.resetActionVisibility();
+    this.actionVisibility[place] = true;
+  }
+
+  resetActionVisibility() {
+    this.actionVisibility = {};
+  }
+
+  deleteFavorite(i) {
+    this.myFavorites.splice(i, 1);
+    this.saveFavorite(this.myFavorites);
+  }
 }

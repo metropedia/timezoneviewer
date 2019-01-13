@@ -11,11 +11,14 @@
 
   <br />
 
-  <div class="tr" *ngFor="let place of myFavorites;"
+  <div class="tr" *ngFor="let place of myFavorites; let i = index"
+      [attr.data-index]="i"
       [ngClass]="{
-        'baseline': baseline === place
+        'baseline': baseline === place,
+        'actions': !!actionVisibility[i] === true
       }"
       (click)="setBaseline(place);"
+      (swipeleft)="onSwipe($event, i)"
   >
     <div class="place">
       <span class="continent">{{ splitBySlash(place)[0] }}</span>
@@ -40,6 +43,9 @@
       <app-timebar [momentSnapshot]="momentSnapshot"
                    [place]="place"
                    [baseline]="baseline"></app-timebar>
+    </div>
+    <div class="action-buttons">
+      <button class="del" (click)="deleteFavorite(i)">DELETE</button>
     </div>
   </div>
 </div>

@@ -9,10 +9,6 @@
 .tr>div {
   flex: 1 1 auto;
 }
-.tr:hover {
-  background: #444;
-}
-.tr.baseline:hover,
 .tr.baseline {
   background: #fff;
   color: #333;
@@ -63,4 +59,31 @@
 .add-fav .form-control {
   background: #000;
   border: 1px solid #611038;
+}
+
+.actions {
+  margin-left: -95px;
+  animation-name: swipe;
+  animation-duration: .1s;
+}
+.actions .action-buttons {
+  display: inline-block;
+}
+.action-buttons {
+  display: none;
+  background: #fff;
+  flex: 0 0 100px !important;
+}
+.action-buttons>button {
+  flex: 1 1 auto;
+  border: none;
+  height: 100%;
+}
+button.del {
+  background: #ff004d;
+  color: #fff;
+}
+@keyframes swipe {
+  from { margin-left: 0;}
+  to { margin-left: -95px; }
 }
