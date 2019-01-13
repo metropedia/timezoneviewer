@@ -10,7 +10,15 @@
   text-align: center;
   font-size: 19px;
   background: rgba(0, 0, 0, 0.05);
-  color: #666;
+  color: rgba(45, 45, 45, 0.9);
+}
+.fragment.current {
+  flex: 0 0 60px;
+  width: 60px;
+}
+.fragment.baseline {
+  color: #ccc;
+  background: #fff;
 }
 .cycle {
   flex: 0 0 auto;
@@ -25,16 +33,12 @@
   height: 10px;
 }
 .vertical-baseline {
-  background: #f2f2f2;
+  color: #f2f2f2;
   width: 60px;
   height: 80px;
   position: absolute;
   margin-top: -24px;
   padding-top: 24px;
-}
-.fragment.current {
-  flex: 0 0 60px;
-  width: 60px;
 }
 .baseline .vertical-baseline .focus {
   width: 60px;
@@ -43,4 +47,5 @@
   overflow: hidden;
   background: #fff;
   color: indianred;
+  font-size: 1.2em;
 }
