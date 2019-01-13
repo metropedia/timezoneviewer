@@ -1,46 +1,55 @@
 <div (click)="refreshTime()">
-
-<div class="row">
-  <div class="col col-sm-12 col-md-6 col-lg-6">
-    <input [(ngModel)]="selectedPlace"
-           [typeahead]="timezones"
-           placeholder="Type your favorite places here"
-           class="form-control"
-           (keyup)="addFavorite($event)">
+  <div class="add-fav">
+    <div class="col col-sm-12">
+      <input [(ngModel)]="selectedPlace"
+             [typeahead]="timezones"
+             placeholder="Type your favorite places here"
+             class="form-control"
+             (typeaheadOnSelect)="addFavorite()">
+    </div>
   </div>
-</div>
 
-<br />
+  <br />
 
-<table>
-  <tr *ngFor="let place of myFavorites;"
+  <div class="tr" *ngFor="let place of myFavorites;"
       [ngClass]="{
         'baseline': baseline === place
       }"
       (click)="setBaseline(place);"
   >
-    <td height="80"
-        class="place">{{ place }}</td>
-    <td class="time">
+    <div class="place">
+      <span class="continent">{{ splitBySlash(place)[0] }}</span>
+      <span class="slash">{{ splitBySlash(place)[0] != '' ? '/' : '' }}</span>
+      <span class="city">{{ splitBySlash(place)[1] }}</span>
+    </div>
+    <div class="time">
       <div>{{ momentSnapshot.tz(place).format('MMMM') }}</div>
       <div>{{ momentSnapshot.tz(place).format('Do') }}</div>
-    </td>
+    </div>
     <!--
-    <td>{{
+    <div>{{
       (
         momentSnapshot.tz(place).utcOffset()
        -momentSnapshot.tz(baseline).utcOffset()
       )/60
-    }}</td>
-    <td>{{ momentSnapshot.tz(place).utcOffset()/60 }}</td>
-    <td>{{ momentSnapshot.tz(place).format('HH:mm:ss') }}</td>
+    }}</div>
+    <div>{{ momentSnapshot.tz(place).utcOffset()/60 }}</div>
+    <div>{{ momentSnapshot.tz(place).format('HH:mm:ss') }}</div>
     -->
-    <td>
+    <div class="timebar">
       <app-timebar [momentSnapshot]="momentSnapshot"
                    [place]="place"
                    [baseline]="baseline"></app-timebar>
-    </td>
-  </tr>
-</table>
-
+    </div>
+  </div>
 </div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

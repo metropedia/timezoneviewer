@@ -1,23 +1,62 @@
-tr td {
+.tr {
   cursor: default;
+  display: flex;
 }
-tr:hover {
+.tr>div {
+  flex: 1 1 auto;
+}
+.tr:hover {
   background: #444;
 }
-tr.baseline:hover,
-tr.baseline {
+.tr.baseline:hover,
+.tr.baseline {
   background: #fff;
   color: #333;
 }
-.place {
+.tr>div.place {
   font-size: 2em;
   padding-left: 20px;
+  flex: 0 0 300px;
+  height: 60px;
+  line-height: 60px;
 }
-.time {
+.tr>div.time {
   font-size: 15px;
   text-align: center;
-  padding: 0 10px;
+  padding: 10px;
+  flex: 0 0 100px;
 }
-.time>div:first-child {
+.tr>div.time>div:first-child {
   font-size: 12px;
+}
+.tr>div.timebar {
+  padding-top: 15px;
+}
+@media only screen and (max-width: 375px) {
+  .tr>div.place {
+    flex: 0 0 150px;
+    font-size: 1.2em;
+    padding-left: 10px;
+  }
+  .tr>div.place>.continent {
+    font-size: 0.8em;
+    display: block;
+    height: 10px;
+    line-height: 30px;
+  }
+  .tr>div.place>.continent:empty {
+    display: none;
+  }
+  .tr>div.place>.slash {
+    display: none;
+  }
+  .tr>div.place>.city {
+    font-size: 1.4em;
+    height: 40px;
+    line-height: 60px;
+  }
+}
+.add-fav .form-control {
+  background: #000;
+  border: 1px solid #611038;
 }
