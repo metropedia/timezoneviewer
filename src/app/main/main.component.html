@@ -6,6 +6,9 @@
              placeholder="Type your favorite places here"
              class="form-control"
              (typeaheadOnSelect)="addFavorite()">
+      <div class="clear-search"
+           *ngIf="selectedPlace"
+           (click)="clearSearch()">Clear</div>
     </div>
   </div>
 
@@ -45,6 +48,7 @@
                    [baseline]="baseline"></app-timebar>
     </div>
     <div class="action-buttons">
+      <button class="set">SET</button>
       <button class="del" (click)="deleteFavorite(i)">DELETE</button>
     </div>
   </div>

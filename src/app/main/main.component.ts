@@ -29,11 +29,18 @@ export class MainComponent implements OnInit {
     }
   }
 
+  clearSearch() {
+    this.selectedPlace = '';
+  }
+
   addFavorite() {
     console.log('add', this.selectedPlace);
     const place = this.selectedPlace;
-    this.myFavorites.push(place);
-    this.saveFavorite(this.myFavorites);
+
+    if (this.myFavorites.indexOf(place) === -1) {
+      this.myFavorites.push(place);
+      this.saveFavorite(this.myFavorites);
+    }
   }
 
   saveFavorite(list) {
@@ -74,17 +81,28 @@ export class MainComponent implements OnInit {
     return parts.length > 1 ? parts : ['', text];
   }
 
-  onSwipe(event, place) {
+  onSwipe(event, i) {
     this.resetActionVisibility();
-    this.actionVisibility[place] = true;
+    this.setActionVisibility(i, true);
   }
 
   resetActionVisibility() {
     this.actionVisibility = {};
   }
 
+  setActionVisibility(i, visibility) {
+    this.actionVisibility[i] = visibility;
+  }
+
   deleteFavorite(i) {
+    const base = this.myFavorites.indexOf(this.getBaseline());
+
     this.myFavorites.splice(i, 1);
     this.saveFavorite(this.myFavorites);
+    this.setActionVisibility(i, false);
+    
+    if ( base === i ) {
+      this.setBaseline(null);
+    }
   }
 }
