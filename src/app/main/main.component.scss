@@ -2,6 +2,22 @@
   min-height: 800px;
   display: block;
 }
+.clear-search {
+  cursor: default;
+  background: #ccc;
+  border-radius: 10px;
+  width: 52px;
+  height: 20px;
+  overflow: hidden;
+  line-height: 20px;
+  text-align: center;
+  font-family: sans-serif, Arial;
+  float: right;
+  position: relative;
+  top: -29px;
+  right: 10px;
+  color: #000000;
+}
 .tr {
   cursor: default;
   display: flex;
@@ -62,20 +78,20 @@
 }
 
 .actions {
-  margin-left: -95px;
+  margin-left: -195px;
   animation-name: swipe;
   animation-duration: .1s;
 }
 .actions .action-buttons {
-  display: inline-block;
+  display: flex;
 }
 .action-buttons {
   display: none;
   background: #fff;
-  flex: 0 0 100px !important;
+  flex: 0 0 200px;
 }
 .action-buttons>button {
-  flex: 1 1 auto;
+  flex: 0 0 100px;
   border: none;
   height: 100%;
 }
@@ -83,7 +99,11 @@ button.del {
   background: #ff004d;
   color: #fff;
 }
+button.set {
+  background: #7dd2ff;
+  color: #fff;
+}
 @keyframes swipe {
   from { margin-left: 0;}
-  to { margin-left: -95px; }
+  to { margin-left: -195px; }
 }
